@@ -37,7 +37,6 @@ import dynamic from "next/dynamic";
 import { useWebContainer } from "@/modules/webcontainers/hooks/useWebContainer";
 import {
   AlertCircle,
-  Bot,
   FileText,
   FolderOpen,
   Save,
@@ -48,7 +47,6 @@ import { useParams } from "next/navigation";
 import React, {
   useCallback,
   useEffect,
-  useReducer,
   useRef,
   useState,
 } from "react";
@@ -65,7 +63,7 @@ const MainPlaygroundPage = () => {
   const { id } = useParams<{ id: string }>();
   const [isPreviewVisible, setIsPreviewVisible] = useState(true);
 
-  const { playgroundData, templateData, isLoading, error, saveTemplateData } =
+  const { playgroundData, templateData, isLoading, saveTemplateData } =
     usePlayground(id);
 
     const aiSuggestions = useAISuggestions();
@@ -266,7 +264,6 @@ const MainPlaygroundPage = () => {
       writeFileSync,
       instance,
       saveTemplateData,
-      setTemplateData,
       setOpenFiles,
     ]
   );
