@@ -96,7 +96,7 @@ const MainPlaygroundPage = () => {
     error: containerError,
     instance,
     writeFileSync,
-    // @ts-expect-error
+    // @ts-expect-error - useWebContainer return type needs update
   } = useWebContainer({ templateData });
 
   const lastSyncedContent = useRef<Map<string, string>>(new Map());
@@ -208,9 +208,9 @@ const MainPlaygroundPage = () => {
           JSON.stringify(latestTemplateData)
         );
 
-        // @ts-expect-error
+        // @ts-expect-error - Recursive function type inference issue
           const updateFileContent = (items: (TemplateFile | TemplateFolder)[]) =>
-            // @ts-expect-error
+            // @ts-expect-error - Map type inference with recursive structure
           items.map((item) => {
             if ("folderName" in item) {
               return { ...item, items: updateFileContent(item.items) };
