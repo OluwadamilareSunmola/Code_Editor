@@ -63,7 +63,7 @@ const MainPlaygroundPage = () => {
   const { id } = useParams<{ id: string }>();
   const [isPreviewVisible, setIsPreviewVisible] = useState(true);
 
-  const { playgroundData, templateData, isLoading, saveTemplateData } =
+  const { playgroundData, templateData, isLoading, error, saveTemplateData } =
     usePlayground(id);
 
     const aiSuggestions = useAISuggestions();
