@@ -11,10 +11,7 @@ export interface User {
   export interface Project {
     id: string
     title: string
-    description: string
-    template: string
-    createdAt: Date
-    updatedAt: Date
+  description: string | null
     userId: string
     user: User
     Starmark: { isMarked: boolean }[]
