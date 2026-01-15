@@ -95,7 +95,7 @@ export const createPlayground = async (data: {
   }
 };
 
-export const deleteProjectById = async (id: string) => {
+export const deleteProjectById = async (id: string): Promise<void> => {
   try {
     await db.playground.delete({
       where: {
@@ -111,7 +111,7 @@ export const deleteProjectById = async (id: string) => {
 export const editProjectById = async (
   id: string,
   data: { title: string; description: string }
-) => {
+): Promise<void> => {
   try {
     await db.playground.update({
       where: {
@@ -125,7 +125,7 @@ export const editProjectById = async (
   }
 };
 
-export const duplicateProjectById = async (id: string) => {
+export const duplicateProjectById = async (id: string): Promise<void> => {
   try {
     const originalPlayground = await db.playground.findUnique({
       where: { id },
@@ -135,7 +135,7 @@ export const duplicateProjectById = async (id: string) => {
       throw new Error("Original playground not found");
     }
 
-    const duplicatedPlayground = await db.playground.create({
+    await db.playground.create({
       data: {
         title: `${originalPlayground.title} (Copy)`,
         description: originalPlayground.description,
@@ -147,7 +147,6 @@ export const duplicateProjectById = async (id: string) => {
     });
 
     revalidatePath("/dashboard");
-    return duplicatedPlayground;
   } catch (error) {
     console.error("Error duplicating project:", error);
   }
